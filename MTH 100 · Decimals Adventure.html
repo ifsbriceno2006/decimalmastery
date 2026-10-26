@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MTH 100 · Decimals Adventure</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#fff8ec;--cd:#fff;--tx:#1d2b3a;--mu:#5a6a7a;--ac:#2f6fed;--ok:#1a9a52;--no:#d64040;--f:#ffb703;--bd:#e3d9c6;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#101823;--cd:#1a2635;--tx:#eef3f9;--mu:#a3b3c4;--ac:#5b8cf0;--ok:#43c981;--no:#ff7a7a;--f:#ffc83d;--bd:#2c3b4e}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101823;--cd:#1a2635;--tx:#eef3f9;--mu:#a3b3c4;--ac:#5b8cf0;--ok:#43c981;--no:#ff7a7a;--f:#ffc83d;--bd:#2c3b4e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 system-ui,sans-serif}
+.w{max-width:900px;margin:auto;padding:12px}
+h1{margin:6px 0 0}h2{margin:.4em 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:8px 13px;font:inherit;cursor:pointer}
+button.g{background:var(--bd);color:var(--tx)}button.on{outline:3px solid var(--f)}
+.card{background:var(--cd);border:2px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0;overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.two{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:10px;align-items:start}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.f{font-size:1.1em;display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 4px;line-height:1.15;font-weight:700}
+.f i{font-style:normal;padding:0 5px}.f i:first-child{border-bottom:2px solid currentColor}
+input[type=text],select{font:inherit;padding:6px;border:2px solid var(--bd);border-radius:8px;background:var(--cd);color:var(--tx);width:130px}
+select{width:70px}input[type=range]{width:min(260px,80%)}
+.st{border-left:6px solid var(--ac);background:var(--cd);padding:8px 12px;margin:8px 0;border-radius:8px}
+.k{background:var(--f);color:#222;padding:1px 8px;border-radius:8px;font-weight:800}
+.tip{background:rgba(255,183,3,.2);padding:10px 14px;border-radius:10px;margin:10px 0}
+.notes{line-height:1.8}.notes br{content:"";display:block;margin-top:.7em}
+.hn{color:#1e90ff;font-weight:800}
+.ok{color:var(--ok);font-weight:700}.no{color:var(--no);font-weight:700}
+.pr{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.pv td{border:2px solid var(--ac);padding:6px 12px;text-align:center}.pv .dg{font-size:1.7em;font-weight:800}
+.col{font:700 1.5em/1.4 ui-monospace,Menlo,Consolas,monospace;margin:6px 0;overflow-x:auto}
+svg{vertical-align:middle;max-width:100%}progress{width:100%}
+.p7{font-size:1.25em;line-height:2}.p7 .pr{padding:16px 0;gap:12px}.p7 input[type=text]{width:180px;padding:8px}
+.pb button{font-size:1.15em;margin:3px}
+</style></head><body><div class="w">
+<h1>🔢 Decimals Adventure</h1><div style="color:var(--mu)">MTH 100 · Interactive Modules — work through them in order!</div>
+<div class="tabs" id="nv"></div>
+
+<section>
+<h2>📍 Module 1 · Decimal place values</h2>
+<p>A <b>decimal</b> is a number with a <b>decimal point</b>. The point separates the <b>whole number part</b> (left) from the <b>fraction part</b> (right). Every place is <b>10 times bigger</b> than the place to its right.</p>
+<div class="card"><p>🎛️ Slide to build a decimal. The big square is <b>1 whole</b>, cut into 100 small squares (<b>hundredths</b>).</p><input type="range" id="r1" min="0" max="100" value="37" oninput="u1()"> <b id="v1"></b> hundredths
+<div class="two"><div id="g1"></div><div id="t1"></div></div></div>
+<div class="card"><b>🧱 Place value chart.</b> Type any number: <input type="text" id="pvi" value="352.617" oninput="pv()"><div id="pvo"></div></div>
+<div class="tip notes">⬅️ Moving <b>left</b>: × 10 for each place.<br>➡️ Moving <b>right</b>: ÷ 10 for each place.<br>🔴 The decimal point is <b>not</b> a place; it marks where the ones place ends.<br>🎯 Read 0.37 as “thirty-seven hundredths”, because the last digit is in the hundredths place.</div>
+</section>
+
+<section hidden>
+<h2>🧩 Module 2 · Expanded form</h2>
+<p>Expanded form shows the <b>value of each digit</b>: digit × place value. A zero is only a placeholder (worth 0), so we leave it out.</p>
+<div class="card">Type a number: <input type="text" id="exi" value="352.617" oninput="ex()"><div id="exo"></div></div>
+<div class="card"><b>🧠 Your turn: what is the value of the highlighted digit?</b><p id="vq" style="font-size:1.6em"></p><input type="text" id="vi" placeholder="e.g. 0.06" onkeydown="if(event.key=='Enter')cv()"> <button onclick="cv()">Check</button> <button class="g" onclick="nvq()">Next ▶</button> <span id="vf"></span></div>
+</section>
+
+<section hidden>
+<h2>⚖️ Module 3 · Comparing decimals</h2>
+<div class="tip notes">1️⃣ <b>Line up</b> the decimal points.<br>2️⃣ <b>Fill</b> empty places with zeros (0.5 = 0.50, the value does not change).<br>3️⃣ Compare digit by digit from the <b>left</b>. The first place where the digits differ decides.<br>🐊 &lt; means “is less than”, &gt; means “is greater than”.</div>
+<div class="card"><div oninput="r3()"><input type="text" id="ca" value="0.6"> compared with <input type="text" id="cb" value="0.58"></div><p class="pb">Try: <span id="pb3"></span></p><div id="o3"></div></div>
+<div class="card"><b>🧠 Quick quiz</b><p style="font-size:1.7em"><span id="qa"></span> &nbsp; ? &nbsp; <span id="qb"></span></p><button onclick="a3('lt')">&lt; less than</button> <button onclick="a3('eq')">= equal</button> <button onclick="a3('gt')">&gt; greater than</button> <button class="g" onclick="nq3()">Next ▶</button> <span id="qf3"></span></div>
+<div class="card"><b>📶 Order from least to greatest</b><p id="oq" style="font-size:1.5em"></p><input type="text" id="oi" style="width:280px" placeholder="separate with commas" onkeydown="if(event.key=='Enter')co()"> <button onclick="co()">Check</button> <button class="g" onclick="nqo()">Next ▶</button> <span id="of"></span></div>
+</section>
+
+<section hidden>
+<h2>➕ Module 4 · Add &amp; subtract decimals</h2>
+<div class="tip notes">1️⃣ <b>Line up</b> the decimal points, one under the other.<br>2️⃣ <b>Fill</b> empty places with zeros.<br>3️⃣ Add or subtract like whole numbers.<br>4️⃣ Bring the decimal point <b>straight down</b>.</div>
+<div class="card"><div oninput="r4()" onchange="r4()"><input type="text" id="aa" value="12.5"> <select id="op4"><option>+</option><option>−</option></select> <input type="text" id="ab" value="3.75"></div><p class="pb">Examples: <span id="pb4"></span></p><div id="o4"></div></div>
+</section>
+
+<section hidden>
+<h2>✖️ Module 5 · Multiply &amp; divide decimals</h2>
+<div class="grid"><div class="card"><b>✖️ Multiply</b><br>1️⃣ Ignore the decimal points.<br>2️⃣ Multiply as whole numbers.<br>3️⃣ Count the decimal places in <b>both</b> factors and add them.<br>4️⃣ Give the answer that many decimal places.</div>
+<div class="card"><b>➗ Divide</b><br>1️⃣ Make the <b>divisor</b> a whole number: move its point right, and move the <b>dividend’s</b> point the <b>same</b> number of places.<br>2️⃣ Divide as usual.<br>3️⃣ The point in the answer goes straight above the point in the dividend.</div></div>
+<div class="card"><div oninput="r5()" onchange="r5()"><input type="text" id="ma" value="0.4"> <select id="op5"><option>×</option><option>÷</option></select> <input type="text" id="mb" value="0.03"></div><p class="pb">Examples: <span id="pb5"></span></p><div id="o5"></div></div>
+</section>
+
+<section hidden>
+<h2>🧭 Module 6 · Order of operations</h2>
+<div class="tip notes">🧮 <b>BODMAS</b> (also called PEMDAS) tells us what to do first:<br>1️⃣ <b>B</b>rackets (Parentheses)<br>2️⃣ <b>O</b>rders (powers, like 0.4²)<br>3️⃣ <b>D</b>ivision and <b>M</b>ultiplication: equal rank, work left to right<br>4️⃣ <b>A</b>ddition and <b>S</b>ubtraction: equal rank, work left to right</div>
+<div class="card"><b>Pick an example, then press “Next step”:</b><p class="pb" id="pb6"></p><div id="o6"></div></div>
+</section>
+
+<section hidden>
+<h2>🏆 Module 7 · Final practice</h2>
+<p class="p7">10 questions each for adding, subtracting, multiplying and dividing, plus 8 order of operations questions. They get harder as you go. Type answers as decimals, like <b>16.25</b>.</p>
+<div id="o7" class="p7"></div>
+</section>
+</div>
+<script>
+const $=id=>document.getElementById(id),rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),f=n=>String(+n.toFixed(6));
+const ds=(i,p)=>{const s=String(Math.abs(i)).padStart(p+1,'0');return(i<0?'-':'')+(p?s.slice(0,-p)+'.'+s.slice(-p):s)};
+const fr=(n,d)=>`<span class="f"><i>${n}</i><i>${d}</i></span>`;
+function pd(s){s=String(s).trim();const m=s.match(/^(\d*)\.?(\d*)$/);if(!m||!(m[1]+m[2])||(m[1]+m[2]).length>9)return null;return{i:parseInt(m[1]+m[2],10),p:m[2].length}}
+const W=['Ones','Tens','Hundreds','Thousands','Ten-thousands'],Dn=['Tenths','Hundredths','Thousandths','Ten-thousandths'];
+const stp=(t,b)=>`<div class="st"><b>${t}</b><div>${b}</div></div>`;
+var nid=0;
+function nl(lo,hi,d,pts){const id='ah'+(nid++),x=v=>30+(v-lo)/(hi-lo)*580,y=60,sub=(hi-lo)*d<=60;let o=`<svg viewBox="0 0 640 135" width="100%" style="max-width:640px"><line x1="${x(lo)}" y1="${y}" x2="${x(hi)}" y2="${y}" stroke="var(--tx)" stroke-width="2"/>`;
+for(let k=Math.ceil(lo*d-1e-9);k<=Math.floor(hi*d+1e-9);k++){const w=k%d==0;if(!sub&&!w)continue;o+=`<line x1="${x(k/d)}" y1="${y-(w?9:5)}" x2="${x(k/d)}" y2="${y+(w?9:5)}" stroke="var(--tx)" stroke-width="${w?2:1}"/>`;if(w)o+=`<text x="${x(k/d)}" y="${y+24}" text-anchor="middle" font-size="13" fill="var(--tx)">${k/d}</text>`}
+pts.forEach((p,i)=>o+=`<circle cx="${x(p.v)}" cy="${y}" r="7" fill="var(--f)" stroke="var(--tx)" stroke-width="2"/><text x="${x(p.v)}" y="${y+46+i%2*16}" text-anchor="middle" font-size="14" font-weight="700" fill="var(--tx)">${p.lab}</text>`);return o+'</svg>'}
+const TT=['📍 1 Place value','🧩 2 Expanded','⚖️ 3 Compare','➕ 4 + −','✖️ 5 × ÷','🧭 6 BODMAS','🏆 7 Practice'];
+$('nv').innerHTML=TT.map((t,i)=>`<button class="g" id="nb${i}" onclick="go(${i})">${t}</button>`).join('');
+function go(i){document.querySelectorAll('section').forEach((s,j)=>s.hidden=j!=i);TT.forEach((_,j)=>$('nb'+j).className=j==i?'on':'g');scrollTo(0,0)}
+document.querySelectorAll('section').forEach((s,i)=>{if(i<6)s.insertAdjacentHTML('beforeend',`<p><button onclick="go(${i+1})">Next module ▶</button></p>`)});
+var lab={3:{S:[],k:1},4:{S:[],k:1},5:{S:[],k:1},6:{S:[],k:1}};
+function showSteps(i){const l=lab[i];$('o'+i).innerHTML=l.S.slice(0,l.k).join('')+(l.k<l.S.length?`<button onclick="lab[${i}].k++;showSteps(${i})">Next step ▶</button>`:'<p>🎉 All steps done — change the numbers and try again!</p>')}
+/* M1 */
+function u1(){const h=+r1.value,t=Math.floor(h/10),u=h%10;v1.textContent=h;let o='<svg width="230" height="230" viewBox="0 0 230 230">';for(let c=0;c<10;c++)for(let r=0;r<10;r++)o+=`<rect x="${4+c*22}" y="${4+r*22}" width="22" height="22" fill="${c<t?'var(--f)':(c==t&&r<u)?'var(--ok)':'none'}" stroke="var(--tx)"/>`;g1.innerHTML=o+'</svg>';
+t1.innerHTML=`<p style="font-size:1.5em"><b>${ds(h,2)}</b> = ${h} hundredths = ${fr(h,100)}</p><p>🟨 <b>${t}</b> full column${t==1?'':'s'} = ${t} tenths = <b>${ds(t,1)}</b><br>🟩 <b>${u}</b> extra square${u==1?'':'s'} = ${u} hundredths = <b>${ds(u,2)}</b></p><p>${ds(t,1)} + ${ds(u,2)} = <b>${ds(h,2)}</b></p>`}
+function pv(){const m=pvi.value.trim().match(/^(\d{1,5})(?:\.(\d{0,4}))?$/);if(!m){pvo.innerHTML='<span class="no">Type a number like 352.617 (up to 5 whole digits and 4 decimals).</span>';return}
+const wh=m[1],de=m[2]||'';let a='',b='',c='';
+for(let k=wh.length-1;k>=0;k--){const d=wh[wh.length-1-k];a+=`<td>${W[k]}</td>`;b+=`<td class="dg">${d}</td>`;c+=`<td>${d=='0'?0:d+'0'.repeat(k)}</td>`}
+if(de){a+='<td></td>';b+='<td class="dg">.</td>';c+='<td></td>'}
+for(let j=0;j<de.length;j++){const d=de[j];a+=`<td>${Dn[j]}</td>`;b+=`<td class="dg">${d}</td>`;c+=`<td>${d=='0'?0:ds(+d,j+1)}</td>`}
+pvo.innerHTML=`<table class="pv"><tr>${a}</tr><tr>${b}</tr><tr>${c}</tr></table><small>Row 1: place name · Row 2: the digit · Row 3: the value of that digit</small>`}
+/* M2 */
+function ex(){const m=exi.value.trim().match(/^(\d{1,5})(?:\.(\d{0,4}))?$/);if(!m){exo.innerHTML='<span class="no">Type a number like 352.617 (up to 5 whole digits and 4 decimals).</span>';return}
+const wh=m[1],de=m[2]||'',t=[],r=[],q=[];
+for(let k=wh.length-1;k>=0;k--){const d=wh[wh.length-1-k];if(d!='0'){t.push(`(${d} × ${10**k})`);r.push(`<b class="hn">${d}</b> is in the ${W[k]} place → value <b>${d*10**k}</b>`)}}
+for(let j=0;j<de.length;j++){const d=de[j];if(d!='0'){t.push(`(${d} × ${ds(1,j+1)})`);r.push(`<b class="hn">${d}</b> is in the ${Dn[j]} place → value <b>${ds(+d,j+1)}</b>`);q.push(fr(d,10**(j+1)))}}
+exo.innerHTML=`<p style="font-size:1.3em;line-height:2"><b>${wh}${de?'.'+de:''}</b> = ${t.join(' + ')||'0'}</p>`+(q.length?`<p>The decimal part as fractions: ${q.join(' + ')}</p>`:'')+'<p>'+r.join('<br>')+'</p>'}
+var vqa,vqp;function nvq(){const wh=''+rnd(1,999),dd=rnd(1,3),de=''+rnd(10**(dd-1),10**dd-1),all=wh+de,c=[];for(let k=0;k<all.length;k++)if(all[k]!='0')c.push(k);const k=c[rnd(0,c.length-1)],d=+all[k];
+vqa=k<wh.length?d*10**(wh.length-1-k):d/10**(k-wh.length+1);vqp=k<wh.length?W[wh.length-1-k]:Dn[k-wh.length];
+vq.innerHTML=[...all].map((ch,i)=>(i==wh.length?'.':'')+(i==k?`<b class="hn">${ch}</b>`:ch)).join('');vf.textContent='';vi.value=''}
+function cv(){const v=parseFloat(vi.value);vf.innerHTML=Math.abs(v-vqa)<1e-9?`<span class="ok">🎉 Correct! It is in the ${vqp} place.</span>`:'<span class="no">❌ Not yet. Name the place first, then write its value (digit × place value).</span>'}
+/* M3 */
+function r3(){const A=pd($('ca').value),B=pd($('cb').value),L=lab[3];L.k=1;
+if(!A||!B){L.S=[stp('⚠️','Type two decimals, like 0.6 and 0.58')];showSteps(3);return}
+const p=Math.max(A.p,B.p),X=A.i*10**(p-A.p),Y=B.i*10**(p-B.p),sa=ds(X,p),sb=ds(Y,p),wl=Math.max(sa.split('.')[0].length,sb.split('.')[0].length);
+const al=(d,fl)=>{const[w,fx='']=ds(d.i,d.p).split('.');return ' '.repeat(wl-w.length)+w+((fx||(fl&&p))?'.':'')+fx+(fl?'<span class="no">'+'0'.repeat(p-fx.length)+'</span>':'')};
+const PA=sa.split('.')[0].padStart(wl,'0')+(sa.split('.')[1]||''),PB=sb.split('.')[0].padStart(wl,'0')+(sb.split('.')[1]||'');let ix=-1;for(let i=0;i<PA.length;i++)if(PA[i]!=PB[i]){ix=i;break}
+const sym=X<Y?'&lt;':X>Y?'&gt;':'=',va=X/10**p,vb=Y/10**p,lo=Math.floor(Math.min(va,vb)),hi=Math.max(lo+1,Math.ceil(Math.max(va,vb))),s=[];
+s.push(stp('Step 1 · Line up the decimal points',`<pre class="col">${al(A,0)}\n${al(B,0)}</pre>`));
+s.push(stp('Step 2 · Fill empty places with zeros',`<pre class="col">${al(A,1)}\n${al(B,1)}</pre><small>Red zeros are placeholders. The value does not change.</small>`));
+s.push(stp('Step 3 · Compare from the left',ix<0?'Every digit matches, so the numbers are <b>equal</b>.':`The first different digit is in the <b>${ix<wl?W[wl-1-ix]:Dn[ix-wl]}</b> place: <b class="hn">${PA[ix]}</b> and <b class="hn">${PB[ix]}</b>.<br>${PA[ix]} is ${+PA[ix]<+PB[ix]?'less':'greater'} than ${PB[ix]}.`));
+s.push(stp('Step 4 · Conclusion',`<p style="font-size:1.6em;margin:4px 0"><b>${$('ca').value} ${sym} ${$('cb').value}</b></p>`+(hi-lo<=10?nl(lo,hi,10,[{v:va,lab:f(va)},{v:vb,lab:f(vb)}])+'<small>📏 The number farther right on the number line is greater.</small>':'')));
+L.S=s;showSteps(3)}
+var q3a,q3x,q3y;const dg=()=>''+rnd(1,9)+(rnd(0,1)?rnd(0,9):'')+(rnd(0,2)==0?rnd(0,9):'');
+function nq3(){const w=rnd(0,9);q3x=w+'.'+dg();q3y=rnd(0,3)?w+'.'+dg():q3x+'0';qa.textContent=q3x;qb.textContent=q3y;const a=parseFloat(q3x),b=parseFloat(q3y);q3a=a<b?'lt':a>b?'gt':'eq';qf3.textContent=''}
+function a3(x){qf3.innerHTML=x==q3a?`<span class="ok">🎉 Yes! ${q3x} ${q3a=='lt'?'&lt;':q3a=='gt'?'&gt;':'='} ${q3y}</span>`:'<span class="no">❌ Line up the points, fill with zeros, then compare from the left.</span>'}
+var oqa;function nqo(){const w=rnd(0,5),a=[];for(let i=0;i<4;i++)a.push(w+'.'+dg());oqa=a.map(parseFloat).sort((x,y)=>x-y);oq.textContent=a.join(' , ');of.textContent='';oi.value=''}
+function co(){const v=oi.value.split(',').map(x=>parseFloat(x));of.innerHTML=v.length==oqa.length&&v.every((x,i)=>x==oqa[i])?'<span class="ok">🎉 Correct order!</span>':'<span class="no">❌ Try again: fill with zeros so every number has the same number of decimal places.</span>'}
+/* M4 */
+function r4(){const A=pd($('aa').value),B=pd($('ab').value),m=$('op4').value=='+',L=lab[4];L.k=1;
+if(!A||!B){L.S=[stp('⚠️','Type two decimals, like 12.5 and 3.75')];showSteps(4);return}
+const p=Math.max(A.p,B.p),X=A.i*10**(p-A.p),Y=B.i*10**(p-B.p),neg=!m&&X<Y,R=m?X+Y:Math.abs(X-Y),sr=ds(R,p),op=m?'+':'−',T=neg?B:A,U=neg?A:B,
+wl=Math.max(ds(X,p).split('.')[0].length,ds(Y,p).split('.')[0].length,sr.split('.')[0].length);
+const al=(d,fl)=>{const[w,fx='']=ds(d.i,d.p).split('.');return ' '.repeat(wl-w.length)+w+((fx||(fl&&p))?'.':'')+fx+(fl?'<span class="no">'+'0'.repeat(p-fx.length)+'</span>':'')};
+const ra=Math.round(A.i/10**A.p),rb=Math.round(B.i/10**B.p),s=[];
+s.push(stp('Step 1 · Line up the decimal points',`<pre class="col">  ${al(T,0)}\n${op} ${al(U,0)}</pre>`+(neg?'<small>The first number is smaller, so we subtract the smaller from the larger and make the answer negative.</small>':'')));
+s.push(stp('Step 2 · Fill empty places with zeros',`<pre class="col">  ${al(T,1)}\n${op} ${al(U,1)}</pre>`));
+s.push(stp('Step 3 · Calculate like whole numbers',`Ignore the point for a moment:<br><b>${neg?Y:X} ${op} ${neg?X:Y} = ${R}</b>`));
+s.push(stp('Step 4 · Bring the decimal point straight down',`<pre class="col">  ${al(T,1)}\n${op} ${al(U,1)}\n${'─'.repeat(wl+(p?p+1:0)+2)}\n  ${' '.repeat(wl-sr.split('.')[0].length)}${sr}</pre>Answer: <b>${neg?'−':''}${sr}</b><br><small>✅ Estimate check: ${ra} ${op} ${rb} ≈ ${m?ra+rb:ra-rb}</small>`));
+L.S=s;showSteps(4)}
+/* M5 */
+function dv(N,B,P){const D=B*10**P,ip=Math.floor(N/D);let rem=N%D,d='';for(let k=0;k<8&&rem;k++){rem*=10;d+=Math.floor(rem/D);rem%=D}return{s:ip+(d?'.'+d:''),exact:rem==0}}
+function r5(){const A=pd($('ma').value),B=pd($('mb').value),m=$('op5').value=='×',L=lab[5];L.k=1;
+if(!A||!B){L.S=[stp('⚠️','Type two decimals, like 0.4 and 0.03')];showSteps(5);return}
+const sa=ds(A.i,A.p),sb=ds(B.i,B.p),pl=n=>n+' decimal place'+(n==1?'':'s'),s=[];
+if(m){const P=A.i*B.i,p=A.p+B.p;if(P>Number.MAX_SAFE_INTEGER){L.S=[stp('⚠️','Use smaller numbers.')];showSteps(5);return}
+s.push(stp('Step 1 · Ignore the decimal points',`${sa} → <b>${A.i}</b> (${pl(A.p)})<br>${sb} → <b>${B.i}</b> (${pl(B.p)})`));
+s.push(stp('Step 2 · Multiply as whole numbers',`${A.i} × ${B.i} = <b>${P}</b>`));
+s.push(stp('Step 3 · Count the decimal places',`${A.p} + ${B.p} = <b>${p}</b> decimal places in the answer`));
+s.push(stp('Step 4 · Place the decimal point',`Start at the right end of ${P} and move the point <b>${p}</b> place${p==1?'':'s'} left (add zeros in front if needed).<br><p style="font-size:1.4em;margin:4px 0">${sa} × ${sb} = <b>${ds(P,p)}</b></p>`))}
+else{if(B.i==0){L.S=[stp('⚠️','You cannot divide by zero!')];showSteps(5);return}
+const q=B.p,I=A.p>=q?A.i:A.i*10**(q-A.p),P=Math.max(0,A.p-q),sh=ds(I,P),r=dv(I,B.i,P);
+s.push(stp('Step 1 · Make the divisor a whole number',q?`Move the point <b>${q}</b> place${q==1?'':'s'} to the right in <b>both</b> numbers:<br>${sa} ÷ ${sb} becomes <b>${sh} ÷ ${B.i}</b>`:`The divisor ${sb} is already a whole number ✅`));
+s.push(stp('Step 2 · Divide as usual',`Put the decimal point in the answer <b>straight above</b> the point in the dividend.<br><p style="font-size:1.4em;margin:4px 0">${sh} ÷ ${B.i} = <b>${r.exact?r.s:'≈ '+(I/(B.i*10**P)).toFixed(4)}</b></p>`+(r.exact?'':'This answer does not end, so it is rounded to 4 decimal places.')));
+if(r.exact)s.push(stp('Step 3 · Check by multiplying',`answer × divisor should give the dividend: <b>${r.s} × ${sb}</b> should equal <b>${sa}</b> ✅`))}
+L.S=s;showSteps(5)}
+/* presets */
+const PB={3:[['0.6 vs 0.58','0.6','0.58'],['3.5 vs 3.50','3.5','3.50'],['0.09 vs 0.1','0.09','0.1'],['12.3 vs 9.87','12.3','9.87']],
+4:[['12.5 + 3.75','12.5','+','3.75'],['7 − 2.38','7','−','2.38'],['0.6 + 0.07','0.6','+','0.07'],['45.2 − 18.76','45.2','−','18.76'],['3.4 − 5.9','3.4','−','5.9']],
+5:[['0.4 × 0.3','0.4','×','0.3'],['2.5 × 1.2','2.5','×','1.2'],['0.06 × 8','0.06','×','8'],['7.5 ÷ 5','7.5','÷','5'],['1.44 ÷ 0.12','1.44','÷','0.12'],['2.8 ÷ 0.04','2.8','÷','0.04'],['1 ÷ 3','1','÷','3']]};
+[3,4,5].forEach(k=>$('pb'+k).innerHTML=PB[k].map((p,j)=>`<button class="g" onclick="pre(${k},${j})">${p[0]}</button>`).join(' '));
+function pre(k,j){const P=PB[k][j];if(k==3){$('ca').value=P[1];$('cb').value=P[2];r3()}else{const[a,o,b]=k==4?['aa','op4','ab']:['ma','op5','mb'];$(a).value=P[1];$(o).value=P[2];$(b).value=P[3];k==4?r4():r5()}}
+/* M6 + order of operations templates */
+const OO=[
+v=>{const[a,b,c]=v,m=b*c;return{e:`${f(a)} + ${f(b)} × ${f(c)}`,s:[`<b>Multiply before adding:</b> ${f(b)} × ${f(c)} = ${f(m)}`,`<b>Add:</b> ${f(a)} + ${f(m)} = <b>${f(a+m)}</b>`],a:a+m}},
+v=>{const[a,b,c]=v,s=a+b;return{e:`(${f(a)} + ${f(b)}) × ${f(c)}`,s:[`<b>Brackets first:</b> ${f(a)} + ${f(b)} = ${f(s)}`,`<b>Multiply:</b> ${f(s)} × ${f(c)} = <b>${f(s*c)}</b>`],a:s*c}},
+v=>{const[a,b,c]=v,q=b/c;return{e:`${f(a)} − ${f(b)} ÷ ${f(c)}`,s:[`<b>Divide before subtracting:</b> ${f(b)} ÷ ${f(c)} = ${f(q)}`,`<b>Subtract:</b> ${f(a)} − ${f(q)} = <b>${f(a-q)}</b>`],a:a-q}},
+v=>{const[a,b,c]=v,d=a-b;return{e:`(${f(a)} − ${f(b)}) ÷ ${f(c)}`,s:[`<b>Brackets first:</b> ${f(a)} − ${f(b)} = ${f(d)}`,`<b>Divide:</b> ${f(d)} ÷ ${f(c)} = <b>${f(d/c)}</b>`],a:d/c}},
+v=>{const[a,b,c]=v,m=a*b;return{e:`${f(a)} × ${f(b)} − ${f(c)}`,s:[`<b>Multiply first:</b> ${f(a)} × ${f(b)} = ${f(m)}`,`<b>Subtract:</b> ${f(m)} − ${f(c)} = <b>${f(m-c)}</b>`],a:m-c}},
+v=>{const[a,b]=v,s=b*b;return{e:`${f(a)} + ${f(b)}²`,s:[`<b>Orders (powers) first:</b> ${f(b)}² = ${f(b)} × ${f(b)} = ${f(s)}`,`<b>Add:</b> ${f(a)} + ${f(s)} = <b>${f(a+s)}</b>`],a:a+s}},
+v=>{const[a,b,c,d]=v,s=b+c,m=a*s;return{e:`${f(a)} × (${f(b)} + ${f(c)}) − ${f(d)}`,s:[`<b>Brackets first:</b> ${f(b)} + ${f(c)} = ${f(s)}`,`<b>Multiply:</b> ${f(a)} × ${f(s)} = ${f(m)}`,`<b>Subtract:</b> ${f(m)} − ${f(d)} = <b>${f(m-d)}</b>`],a:m-d}}];
+const EXV=[[3.2,0.5,4],[1.2,0.8,5],[9.6,4.5,5],[8.4,2.4,4],[2.5,0.8,0.6],[1.5,0.4],[3,1.2,0.8,2.5]];
+$('pb6').innerHTML=EXV.map((v,t)=>`<button class="g" onclick="ex6(${t})">${OO[t](v).e}</button>`).join(' ');
+function ex6(t){const o=OO[t](EXV[t]);lab[6].S=[stp('Problem',`<p style="font-size:1.5em;margin:4px 0"><b>${o.e}</b></p>`)].concat(o.s.map((x,i)=>stp('Step '+(i+1),x)));lab[6].k=1;showSteps(6)}
+ex6(0);pre(3,0);pre(4,0);pre(5,0);
+/* M7 */
+const VG=t=>{const t1=()=>rnd(11,99)/10,t2=()=>rnd(11,59)/10,c=[2,4,5][rnd(0,2)];return[[t1(),t2(),rnd(2,9)],[t2(),t2(),rnd(2,9)],[rnd(50,99)/10,t1(),c],[rnd(60,99)/10,t2(),c],[t2(),t2(),rnd(1,9)/10],[t1(),t2()],[rnd(2,9),t2(),t2(),rnd(1,39)/10]][t]};
+function goo(i){const t=i<7?i:rnd(0,6),o=OO[t](VG(t));return{e:o.e,a:o.a,s:o.s.join('<br>'),ok:0}}
+function gq(k,i){const lv=i<3?0:i<7?1:2,mk=(p,lo,hi)=>ds(rnd(lo,hi),p);
+if(k=='add'||k=='sub'){let[A,B]=[[mk(1,11,99),mk(1,11,99)],[mk(2,101,999),mk(1,11,99)],[mk(0,2,40),mk(2,101,999)]][lv];if(k=='sub'&&parseFloat(A)<parseFloat(B))[A,B]=[B,A];
+const a=pd(A),b=pd(B),p=Math.max(a.p,b.p),X=a.i*10**(p-a.p),Y=b.i*10**(p-b.p),R=k=='add'?X+Y:X-Y,res=ds(R,p),op=k=='add'?'+':'−';
+return{e:`${A} ${op} ${B}`,a:parseFloat(res),s:`Line up the points and fill with zeros: ${ds(X,p)} ${op} ${ds(Y,p)}<br>${X} ${op} ${Y} = ${R} → <b>${res}</b>`,ok:0}}
+if(k=='mul'){const[A,B]=[[mk(1,11,99),''+rnd(2,9)],[mk(1,11,99),mk(1,2,9)],[rnd(0,1)?mk(2,101,999):mk(1,11,99),rnd(0,1)?mk(1,11,99):''+rnd(11,25)]][lv],a=pd(A),b=pd(B),P=a.i*b.i,p=a.p+b.p;
+return{e:`${A} × ${B}`,a:parseFloat(ds(P,p)),s:`Ignore the points: ${a.i} × ${b.i} = ${P}<br>Decimal places: ${a.p} + ${b.p} = ${p} → <b>${ds(P,p)}</b>`,ok:0}}
+let A,B,ans;if(lv==0){const b=rnd(2,9),Q=rnd(11,99),qp=rnd(1,2);A=ds(b*Q,qp);B=''+b;ans=ds(Q,qp)}else if(lv==1){const D=rnd(2,9),Q=rnd(2,40),qp=rnd(0,1);B=ds(D,1);A=ds(D*Q,1+qp);ans=ds(Q,qp)}else{const D=rnd(12,48),Q=rnd(2,30),qp=rnd(0,1);B=ds(D,2);A=ds(D*Q,2+qp);ans=ds(Q,qp)}
+const a=pd(A),b=pd(B),q=b.p,I=a.p>=q?a.i:a.i*10**(q-a.p),sh=ds(I,Math.max(0,a.p-q));
+return{e:`${A} ÷ ${B}`,a:parseFloat(ans),s:(q?`Move both points ${q} place${q==1?'':'s'} right: <b>${sh} ÷ ${b.i}</b><br>`:'Divide as usual, point straight up: ')+`${sh} ÷ ${b.i} = <b>${ans}</b>`,ok:0}}
+var P={},cur='add';const NM={add:'➕ Add',sub:'➖ Subtract',mul:'✖️ Multiply',div:'➗ Divide',oo:'🧭 BODMAS'};
+const gen=k=>{const a=[];for(let i=0;i<(k=='oo'?8:10);i++)a.push(k=='oo'?goo(i):gq(k,i));return a};
+function rp(){$('o7').innerHTML=`<div class="tabs">${Object.keys(NM).map(k=>`<button class="${k==cur?'':'g'}" onclick="cur='${k}';rp()">${NM[k]} <span id="c_${k}"></span></button>`).join('')}</div><p>⭐ Total score: <b id="sc"></b> / 48</p><progress id="pg" max="48" value="0"></progress><div class="card">`+P[cur].map((p,i)=>`<div class="pr"><b>${i+1}.</b><span>${p.e} =</span><input type="text" id="i${i}" placeholder="e.g. 16.25" value="${p.v||''}" onkeydown="if(event.key=='Enter')chk(${i})"><button onclick="chk(${i})">Check</button><button class="g" onclick="sol(${i})">💡 Show work</button><div id="f${i}">${p.m||''}</div></div>`).join('')+`</div><button class="g" onclick="P[cur]=gen(cur);rp()">🔄 New set</button>`;sc()}
+function sc(){let t=0;for(const k in P){const c=P[k].filter(p=>p.ok).length;t+=c;if($('c_'+k))$('c_'+k).textContent=c+'/'+P[k].length}$('sc').textContent=t;$('pg').value=t}
+function chk(i){const p=P[cur][i],s=$('i'+i).value.trim();p.v=s;let m;
+if(!/^-?(\d+\.?\d*|\.\d+)$/.test(s))m='<span class="no">Type a decimal, like 16.25</span>';
+else{const v=parseFloat(s);if(Math.abs(v-p.a)<1e-9*Math.max(1,Math.abs(p.a))){m='<span class="ok">🎉 Correct!</span>';p.ok=1}else{const r=p.a?v/p.a:0;m='<span class="no">❌ Not quite.'+([10,100,1000,.1,.01,.001].some(x=>Math.abs(r/x-1)<1e-6)?' Check where you placed the decimal point.':' Try again or press 💡.')+'</span>'}}
+p.m=m;$('f'+i).innerHTML=m;sc()}
+function sol(i){const p=P[cur][i];p.m=p.s+`<br>Answer: <b>${f(p.a)}</b>`;$('f'+i).innerHTML=p.m}
+for(const k in NM)P[k]=gen(k);
+u1();pv();ex();nvq();nq3();nqo();rp();go(0);
+</script></body></html>
